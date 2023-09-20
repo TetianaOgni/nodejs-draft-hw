@@ -1,5 +1,9 @@
 const multer = require('multer') // это промежуточное ПО (middleware) фреймворка Express, 
 // которая используется при загрузке файлов для обработки multipart/form-data
+
+// это мидлвара срабатывает кодга приходят данные в запросе с Content-Type form-data
+//файлы сложит во времен. папку а контроллеру передаст данные об этом файле записанные в req.file,
+//  а json данные запишет в req.body
 const path = require('path')
 const destination = path.resolve('temp')//resolve - це метод Node.js,який будує абсолютний шлях на основі відносного шляху або кількох відносних шляхів.
 
