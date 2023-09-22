@@ -1,3 +1,4 @@
+const gravatar = require('gravatar')//библиотека для генерации url-адресов шаблонных аватарок в Node.js
 const bcrypt = require('bcrypt')
 const {User} = require('../../models/user')
 const {HttpError, ctrlWrapper} = require('../../helpers')
@@ -13,8 +14,8 @@ const register = async(req, res) => {
   }
   
  const hashPassword = await bcrypt.hash(password, 10)
-
-  const newUser = await User.create({...req.body, password: hashPassword})
+  const avatarUrl = gravatar.url(email, {protocol: 'http', s: '100'})// метод url принимает email пользователя и возвращает ссылку на временную аватарку
+  const newUser = await User.create({...req.body, password: hashPassword, avatarUrl})//сохраняем в бд захешированный пароль и ссылку на вр аватакру
   
   const responseBody = {
     user: {

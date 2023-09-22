@@ -14,11 +14,11 @@ const addContact = async (req, res, next) => {
    await fs.rename(oldPath, newPath)// перемещаем файл из папки temp в папку public
 //  после того как мы переместили файл мы можем сохранять в базе ссылку на файл, и ссылка дождна быть
 //  относительно адреса сайта, если это http://localhost:3000/api/contacts, то ссылка это /api/contacts
-   const avatar = path.join('avatars', filename)//создаем путь к файлу относительно адреса сервера
+   const avatarUrl = path.join('avatars', filename)//создаем путь к файлу относительно адреса сервера
 
-  //const {url: avatar} = await cloudinary.uploader.upload(oldPath, {folder: 'avatars'})// если пользуемся облач хранилищем, достаем путь который будем хранить в бд
+  //const {url: avatarUrl} = await cloudinary.uploader.upload(oldPath, {folder: 'avatars'})// если пользуемся облач хранилищем, достаем путь который будем хранить в бд
   //await fs.unlink(oldPath)//если пользуемся облач хранилищем,удаляем файл из папки временного хранения
-  const result = await Contact.create({...req.body, avatar, owner})//благодаря мидлваре app.use(express.json())
+  const result = await Contact.create({...req.body, avatarUrl, owner})//благодаря мидлваре app.use(express.json())
     // в req.body находится объект 
 // {
 //   "name": "John Doe",

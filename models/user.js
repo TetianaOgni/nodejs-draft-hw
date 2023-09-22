@@ -22,14 +22,22 @@ const userSchema = new Schema ({
           enum: subscriptionOptions,
           default: "starter"
         },
-        token: String 
+        token: {// завдяки схемі токен можна сберегти у базі
+          type: String,
+         default: "",
+       },
+       avatarUrl: {
+        type: String,
+        required: true
+       },
   }, {versionKey: false})
 
 userSchema.post('save', handleMongooseError)
 userSchema.pre('findOneAndUpdate', runValidateAtUpdate)
 userSchema.post('findOneAndUpdate', handleMongooseError)
 
-
+//валидация того что приходит на бекенд
+// аватар не валидируют джоином тк мы его выдаем сами
 const registerSchema = Joi.object({
     password: Joi.string().min(6).required(),
     email: Joi.string().pattern(emailRegexp).required(), 

@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose')//подключение библиотеки для работы с MongoDB
 
 const app = require('./app')
-
+ 
 mongoose.set('strictQuery', true)
 const {DB_HOST, PORT = 3000} = process.env
 mongoose.connect(DB_HOST)
@@ -12,7 +12,7 @@ mongoose.connect(DB_HOST)
 })
   .catch(error => {
     console.log(error.message)
-    process.exit(1) 
+    process.exit(1) // команда, яка закриває запущені процеси (1- закрити з невідомою помилкою)
   })
 
 
