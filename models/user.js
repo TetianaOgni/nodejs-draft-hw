@@ -1,4 +1,5 @@
-const {Schema, model} = require('mongoose')
+const {Schema, model} = require('mongoose')// Object Data Modeling - спец библиотека для работы с MongoDB в среде Node.js.
+// предоставляет объектно-документное сопоставление (ODM), что позволяет вам взаимодействовать с MongoDB базой данных
 const Joi = require('joi')
 const {handleMongooseError, runValidateAtUpdate} = require('../helpers')
 
@@ -28,7 +29,6 @@ const userSchema = new Schema ({
        },
        avatarUrl: {
         type: String,
-        required: true
        },
   }, {versionKey: false})
 

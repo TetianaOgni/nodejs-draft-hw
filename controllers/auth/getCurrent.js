@@ -1,5 +1,5 @@
 const {ctrlWrapper} = require('../../helpers')
-
+// обработчик маршрута '/current'
 const getCurrent = async(req, res)=>{
 
     const {email, subscription} = req.user

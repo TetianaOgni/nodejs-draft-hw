@@ -1,8 +1,8 @@
 // middlevware для перевірки токена
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')//пакет к-рый позволяет шифровать и расшифровывать jwt-токены
 const {User} = require('../models/user')
 const {HttpError} = require('../helpers')
-const {SECRET_KEY} = process.env
+const {SECRET_KEY} = process.env// получаем переменную окружения из объекта process.env
 
 const authenticate = async (req, res, next) => {
    const {authorization = ''} = req.headers

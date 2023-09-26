@@ -19,9 +19,9 @@ const contactSchema = new mongoose.Schema (
       type: Boolean,
       default: false,
     },
-    // avatarUrl: {
-    //   type: String,
-    //  },
+    avatarUrl: {
+      type: String,
+     },
     owner: {
       type: mongoose.Schema.Types.ObjectId, // для MongoDB id - це окремий тип данних, на відміну js
       ref: 'user',

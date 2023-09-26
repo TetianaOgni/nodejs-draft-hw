@@ -13,19 +13,28 @@ const register = async(req, res) => {
     });
   }
   
- const hashPassword = await bcrypt.hash(password, 10)
-  const avatarUrl = gravatar.url(email, {protocol: 'http', s: '100'})// метод url принимает email пользователя и возвращает ссылку на временную аватарку
+  const hashPassword = await bcrypt.hash(password, 10)
+  const avatarUrl = gravatar.url(email, {protocol: 'http', s: '250'})// метод url принимает email пользователя и возвращает ссылку на временную аватарку
   const newUser = await User.create({...req.body, password: hashPassword, avatarUrl})//сохраняем в бд захешированный пароль и ссылку на вр аватакру
   
-  const responseBody = {
-    user: {
-      email: email,
-      subscription: subscription,
-    },
-  };
-  res.status(201).header('Content-Type', 'application/json').json(responseBody);
+//   const responseBody = {
+//     user: {
+//       email: email,
+//       subscription: subscription,
+//     },
+//   };
+//   res.status(201).header('Content-Type', 'application/json').json(responseBody);
  
+
+res.status(201).json({
+  username: newUser.username,
+  email: newUser.email,
+})
+
 }
+
+
+
 
 module.exports = {
   register: ctrlWrapper(register), 
