@@ -1,4 +1,5 @@
-const {Schema, model} = require('mongoose')
+const {Schema, model} = require('mongoose')// Object Data Modeling - спец библиотека для работы с MongoDB в среде Node.js.
+// предоставляет объектно-документное сопоставление (ODM), что позволяет вам взаимодействовать с MongoDB базой данных
 const Joi = require('joi')
 const {handleMongooseError, runValidateAtUpdate} = require('../helpers')
 
@@ -22,14 +23,21 @@ const userSchema = new Schema ({
           enum: subscriptionOptions,
           default: "starter"
         },
-        token: String 
+        token: {// завдяки схемі токен можна сберегти у базі
+          type: String,
+         default: "",
+       },
+       avatarUrl: {
+        type: String,
+       },
   }, {versionKey: false})
 
 userSchema.post('save', handleMongooseError)
 userSchema.pre('findOneAndUpdate', runValidateAtUpdate)
 userSchema.post('findOneAndUpdate', handleMongooseError)
 
-
+//валидация того что приходит на бекенд
+// аватар не валидируют джоином тк мы его выдаем сами
 const registerSchema = Joi.object({
     password: Joi.string().min(6).required(),
     email: Joi.string().pattern(emailRegexp).required(), 

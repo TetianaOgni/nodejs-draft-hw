@@ -19,11 +19,16 @@ const contactSchema = new mongoose.Schema (
       type: Boolean,
       default: false,
     },
+    avatarUrl: {
+      type: String,
+     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId, // для MongoDB id - це окремий тип данних, на відміну js
       ref: 'user',
       required: true,
-  }
+  },
+  
+
   }
 )
 contactSchema.post('save', handleMongooseError)
@@ -35,6 +40,7 @@ const addSchema = Joi.object({
     email: Joi.string().required(),
     phone: Joi.string().required(),
     favorite: Joi.boolean().required().messages({"any.required": "missing required name field"}),
+    
   })
 
 const updateFavoriteSchema = Joi.object({
