@@ -30,7 +30,7 @@ describe('test logout route', ()=>{
         password: '000006',
         email: 'ttt@gmail.com',  
         subscription: 'starter',
-       
+        
     }
     const {statusCode, body} = await request(app).post('/api/users/register').send(registerData)
     expect(statusCode).toBe(201)
